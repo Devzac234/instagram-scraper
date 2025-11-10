@@ -1,0 +1,76 @@
+thon src/main.py --input data/inputs.sample.txt --out data/output.jsonl --jsonl
+  python src/main.py --input data/inputs.sample.txt --out data/output.csv --csv
+"""
+import argparse
+import json
+import logging
+import os
+import sys
+from typing import List
+
+# Make "src" a sys.path entry so implicit namespace packages inside it are importable.
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = THIS_DIR
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+from pipelines.bulk_runner import BulkRunner  # type: ignore
+from outputs.exporters import write_json, write_jsonl, write_csv  # type: ignore
+
+logging.basicConfig(
+    level=os.environ.get("LOG_LEVEL", "INFO"),
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+)
+log = logging.getLogger("main")
+
+def read_inputs(path: str) -> List[str]:
+    with open(path, "r", encoding="utf-8") as f:
+        lines = [ln.strip() for ln in f.readlines()]
+    return [ln for ln in lines if ln and not ln.startswith("#")]
+
+def main():
+    parser = argparse.ArgumentParser(description="Instagram Profile Scraper (mock)")
+    parser.add_argument("--input", "-i", required=True, help="Path to newline-separated usernames or profile URLs")
+    parser.add_argument("--out", "-o", required=True, help="Output path (.json, .jsonl, or .csv)")
+    parser.add_argument("--settings", "-s", help="Optional settings JSON (see src/config/settings.example.json)")
+    parser.add_argument("--jsonl", action="store_true", help="Export as JSON Lines")
+    parser.add_argument("--csv", action="store_true", help="Export as CSV")
+    args = parser.parse_args()
+
+    if not os.path.exists(args.input):
+        log.error("Input file not found: %s", args.input)
+        sys.exit(1)
+
+    settings = {}
+    if args.settings:
+        if not os.path.exists(args.settings):
+            log.error("Settings file not found: %s", args.settings)
+            sys.exit(1)
+        with open(args.settings, "r", encoding="utf-8") as f:
+            settings = json.load(f)
+        log.info("Loaded settings from %s", args.settings)
+
+    raw_inputs = read_inputs(args.input)
+    if not raw_inputs:
+        log.warning("No inputs found in %s", args.input)
+        write_json(args.out, [])
+        print(json.dumps({"ok": True, "count": 0, "out": os.path.abspath(args.out)}))
+        return
+
+    runner = BulkRunner(settings=settings)
+    results = runner.run_bulk(raw_inputs)
+
+    # Export
+    os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+    if args.jsonl or args.out.lower().endswith(".jsonl"):
+        write_jsonl(args.out, results)
+    elif args.csv or args.out.lower().endswith(".csv"):
+        write_csv(args.out, results)
+    else:
+        write_json(args.out, results)
+
+    log.info("Wrote %d records to %s", len(results), args.out)
+    print(json.dumps({"ok": True, "count": len(results), "out": os.path.abspath(args.out)}))
+
+if __name__ == "__main__":
+    main()
