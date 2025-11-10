@@ -1,0 +1,97 @@
+[
+  {
+    "insta_id": "2908290239",
+    "URL": "https://www.instagram.com/dummyuser",
+    "profile_pic_url": "https://cdn.example.com/ig/dummyuser/profile.jpg",
+    "username": "dummyuser",
+    "full_name": "Dummyuser",
+    "external_url": "https://dummyuser.example.com",
+    "city_name": null,
+    "ExtractedEmails": "dummyuser@example.com",
+    "ExtractedPhones": "+12025550100",
+    "biography": "Hi, this is @dummyuser. Contact: dummyuser@example.com | +1-202-555-0100",
+    "category_name": "Content Creator",
+    "category_enum": "CONTENT_CREATOR",
+    "followers": 178040,
+    "followings": 4630,
+    "facebook_id": null,
+    "facebook_link": null,
+    "highlight_reel_count": 11,
+    "has_channel": true,
+    "is_business_account": true,
+    "is_professional_account": true,
+    "business_address_json": "{\"city_name\": null, \"city_id\": null, \"latitude\": null, \"longitude\": null, \"street_address\": null, \"zip_code\": null}",
+    "business_contact_method": "UNKNOWN",
+    "business_email": "dummyuser@example.com",
+    "business_phone_number": "+12025550100",
+    "related_profiles": [
+      "dummyuser_friend1",
+      "dummyuser_friend2"
+    ],
+    "connected_fb_page": null,
+    "last_post_date": "2024-07-09 12:00:00",
+    "has_blocked_viewer": false,
+    "has_clips": true,
+    "has_guides": false,
+    "has_onboarded_to_text_post_app": false,
+    "has_requested_viewer": false,
+    "hide_like_and_view_counts": false,
+    "is_embeds_disabled": false,
+    "is_guardian_of_viewer": false,
+    "is_joined_recently": false,
+    "is_private": false,
+    "is_regulated_c18": false,
+    "is_supervised_by_viewer": false,
+    "is_supervised_user": false,
+    "is_supervision_enabled": false,
+    "is_verified": false,
+    "is_verified_by_mv4b": false,
+    "pinned_channels_list_count": 2,
+    "remove_message_entrypoint": false,
+    "requested_by_viewer": false,
+    "restricted_by_viewer": null,
+    "should_show_category": true,
+    "should_show_public_contacts": true,
+    "show_account_transparency_details": false,
+    "timeline_media": [
+      {
+        "node": {
+          "__typename": "GraphImage",
+          "id": "12345678901",
+          "shortcode": "dummyuserShort",
+          "dimensions": {
+            "height": 1080,
+            "width": 1080
+          },
+          "display_url": "https://cdn.example.com/ig/dummyuser/last_post.jpg",
+          "edge_media_to_caption": {
+            "edges": [
+              {
+                "node": {
+                  "text": "Hello from @dummyuser!"
+                }
+              }
+            ]
+          },
+          "edge_media_to_comment": {
+            "count": 42
+          },
+          "comments_disabled": false,
+          "taken_at_timestamp": 1719931200,
+          "edge_liked_by": {
+            "count": 1200
+          },
+          "is_video": false,
+          "owner": {
+            "id": "2908290239",
+            "username": "dummyuser"
+          }
+        }
+      }
+    ],
+    "tagged_profiles": [
+      "dummyuser_friend1",
+      "dummyuser_friend2"
+    ]
+  }
+]
