@@ -1,0 +1,4 @@
+# One username per line or full profile URLs
+dummyuser
+https://www.instagram.com/bitbash_dev
+@pilot_automation
