@@ -1,0 +1,4 @@
+{
+  "fail_fast": false,
+  "notes": "Copy this file to settings.json and tweak as needed. This project is offline-friendly and generates deterministic mock profiles for provided usernames/URLs."
+}
