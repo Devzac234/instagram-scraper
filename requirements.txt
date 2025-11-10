@@ -1,0 +1,4 @@
+# Runtime
+# (standard library only for core logic)
+# Testing
+pytest==8.2.1
